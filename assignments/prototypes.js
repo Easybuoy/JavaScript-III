@@ -133,5 +133,63 @@ Humanoid.prototype.greet = function() {
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
+  function Villian(param) { 
+    Humanoid.apply(this, [param]);
+  }
+  Villian.prototype = Object.create(Humanoid.prototype);
+  Villian.prototype.removeHealth = function() {
+    this.healthPoints --;
+    if (this.healthPoints <= 0) {
+      return this.destroy();
+    }
+    return this.healthPoints;
+  }
+
+  function Hero(object) {
+    Humanoid.apply(this, [object]);
+  }
+  Hero.prototype = Object.create(Humanoid.prototype);
+  Hero.prototype.removeHealth = function() {
+    this.healthPoints --;
+    if (this.healthPoints <= 0) {
+      return this.destroy();
+    }
+    return this.healthPoints;
+  }
+ 
+  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  const hero = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 1,
+      height: 1,
+    },
+    healthPoints: 5,
+    name: 'Bruce',
+    team: 'Mage Guild',
+    weapons: [
+      'Staff of Shamalama',
+    ],
+    language: 'Common Tongue',
+  });
+console.log(hero.removeHealth());
+
+  const villian = new Villian({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 1,
+      height: 1,
+    },
+    healthPoints: 5,
+    name: 'Sam',
+    team: 'Mage Guild',
+    weapons: [
+      'Staff of Shamalama',
+    ],
+    language: 'Common Tongue',
+  });
+  console.log(villian.removeHealth())
